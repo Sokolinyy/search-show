@@ -1,14 +1,19 @@
-import React from 'react'
-import { TVShow } from './Header'
+import React from 'react';
 
-type Props = {
-
+interface Props {
+  searchResults: string[];
 }
 
-const Main = (props: TVShow) => {
+const Main = ({ searchResults }: Props) => {
   return (
-    <div>Main</div>
-  )
-}
+    <main className="main">
+      <ul>
+        {searchResults.map((result, index) => (
+          <li key={index}>{result}</li>
+        ))}
+      </ul>
+    </main>
+  );
+};
 
-export default Main
+export default Main;

@@ -3,26 +3,30 @@ import searchIcon from "../assets/search-icon.svg"
 import tvIcon from "../assets/television-icon.svg"
 import axios from "axios"
 
-type Props = {}
+type Props = {
+  setSearchResults: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
 // Define interface for API request
-export interface TVShow {
+interface TVShow {
   show: {
-    name: string
+    name: string,
+    id: number,
   }
 }
 
-const Header = (props: TVShow) => {
+const Header = ({ setSearchResults }: Props) => {
 
-  const api = () => {
+  const handleApi = () => {
     // Get search result from input value
     axios.get(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
     .then(response => {
       // 
-      const searchResults: TVShow[] = response.data;
-      searchResults.forEach(result => {
-      console.log(result.show.name);
-    });
+      const searchResults: string[] = response.data.map(
+        (result: TVShow) => result.show.name
+      );
+      console.log(searchResults);
+      setSearchResults(searchResults)
     })
     .catch(error => {
       console.log(error);
@@ -35,8 +39,6 @@ const Header = (props: TVShow) => {
     setInputValue(event.target.value)
   }
 
-  console.log(inputValue)
-
   return (
     <header className='header'>
       <div className='header-container'>
@@ -47,7 +49,7 @@ const Header = (props: TVShow) => {
         <div className='about-search-box'>
           <div className='search'>
             <input type="text" placeholder='Search...' value={inputValue} onChange={handleInputChange}/>
-            <img className='search-icon' onClick={api} src={searchIcon} alt="" />
+            <img className='search-icon' onClick={handleApi} src={searchIcon} alt="" />
           </div>
           <div className='about'>
             About
