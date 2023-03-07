@@ -1,0 +1,65 @@
+$mainColor: #73b7cc;
+
+:root {
+  background-color: $mainColor;
+}
+
+.header {
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 30px;
+    gap: 30px;
+
+    .logo-box {
+      display: flex;
+      gap: 10px;
+
+      .logo-img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .about-search-box {
+      display: flex;
+      gap: 100px;
+      justify-content: space-between;
+    }
+
+    .search {
+      position: relative;
+
+      input {
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 20px;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        background-color: #d2f5ff;
+      }
+
+      .search-icon {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        right: -30px;
+        transform: translateY(-50%);
+      }
+    }
+
+    .about {
+      color: rgb(0, 0, 0);
+      border: 3px solid black;
+      padding: 2px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  }
+
+}
