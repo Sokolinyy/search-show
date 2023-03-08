@@ -7,8 +7,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header setSearchResults={setSearchResults} />
-      <Main searchResults={searchResults} />
+      <Header />
+      <Main  />
     </div>
   )
 }

@@ -1,19 +1,31 @@
-import React from 'react';
+import React from 'react'
 
-interface Props {
-  searchResults: string[];
+type Props = {
+  data?: {
+    id: number;
+    name: string;
+}[]
 }
 
-const Main = ({ searchResults }: Props) => {
+
+const Main = ({ data }: Props) => {
+  const isEmpty = () => {
+    if (data?.length === 0) {
+      return <li>Not found</li>
+    }
+  }
+
   return (
-    <main className="main">
+    <main className='main'>
       <ul>
-        {searchResults.map((result, index) => (
-          <li key={index}>{result}</li>
-        ))}
+        {data ? (
+          data.map(item => <li key={item.id}>{item.name}</li>)
+        ) : (
+          isEmpty()
+        )}
       </ul>
     </main>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main
