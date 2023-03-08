@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import searchIcon from "../assets/search-icon.svg";
 import tvIcon from "../assets/television-icon.svg";
 import axios from "axios";
-import Main from "./Main";
+import SearchResult from "./SearchResult";
 
 // Define interface for API request
 interface TVShow {
@@ -14,7 +14,7 @@ const Header = () => {
   const [data, setData] = useState<{ id: number; name: string }[]>([]);
   const [inputValue, setInputValue] = useState("");
 
-  const handleApi = () => {
+  const handleApi = async () => {
     axios
       .get(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
       .then((response) => {
@@ -64,7 +64,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <Main data={data} />
+      <SearchResult data={data} />
     </>
   );
 };
