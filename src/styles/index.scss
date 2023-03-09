@@ -2,14 +2,36 @@
 
 $mainColor: #73b7cc;
 
+* a {
+  text-decoration: none;
+  color: black;
+}
+
 :root {
   background-color: $mainColor;
   font-family: 'Roboto', sans-serif;
 }
 
+.Home {
+  height: 100vh;
+  display: flex;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 
   .header-container {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -69,6 +91,7 @@ $mainColor: #73b7cc;
 }
 
 .main {
+  margin-top: 90px;
 
   .search-result {
     list-style: none;
@@ -97,4 +120,8 @@ $mainColor: #73b7cc;
     text-align: center;
     width: max-content;
   }
+}
+
+.Shows {
+  margin-top: 90px;
 }

@@ -1,37 +1,20 @@
-import { useState } from "react";
-import NewPage from "./NewPage";
+import { Link } from "react-router-dom";
+import { SearchContext } from "./SearchContext";
+import { useContext } from "react";
 
-type Props = {
-  data?: {
-    id: number;
-    name: string;
-  }[];
-};
-
-const SearchResult = ({ data }: Props) => {
-  const isEmpty = () => {
-    if (data?.length === 0) {
-      return <li>Not found</li>;
-    }
-  };
-
-  const [displayDetail, setDisplayDetail] = useState(false)
-
-  const showDetail = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    setDisplayDetail(true)
-  };
+const SearchResult = () => {
+  const { data } = useContext(SearchContext);
 
   return (
     <main className="main">
       <ul className="search-result">
-        {data && showDetail
+        {data
           ? data.map((item) => (
-              <a key={item.id} onClick={showDetail} href={`https://api.tvmaze.com/shows/${item.id}` }>
+              <Link key={item.id} to={`/${item.id}`} >
                 <li className="search-list-result">{item.name}</li>
-              </a>
+              </Link>
             ))
-          : isEmpty()}
+          : ""}
       </ul>
     </main>
   );

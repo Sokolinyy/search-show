@@ -3,7 +3,10 @@ import searchIcon from "../assets/search-icon.svg";
 import tvIcon from "../assets/television-icon.svg";
 import axios from "axios";
 import SearchResult from "./SearchResult";
-
+import Shows from "./Shows";
+import { Link } from "react-router-dom";
+import { SearchContext } from "./SearchContext";
+import { useContext } from "react";
 // Define interface for API request
 interface TVShow {
   name: string;
@@ -11,8 +14,8 @@ interface TVShow {
 }
 
 const Header = () => {
-  const [data, setData] = useState<{ id: number; name: string }[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const { data, setData } = useContext(SearchContext);
 
   const handleApi = async () => {
     axios
@@ -38,13 +41,12 @@ const Header = () => {
   };
 
   return (
-    <>
       <header className="header">
         <div className="header-container">
-          <div className="logo-box">
+          <Link to="/" className="logo-box">
             <img className="logo-img" src={tvIcon} alt="" />
             TV SEARCH
-          </div>
+          </Link>
           <div className="about-search-box">
             <div className="search">
               <input
@@ -53,19 +55,19 @@ const Header = () => {
                 value={inputValue}
                 onChange={handleInputChange}
               />
-              <img
-                className="search-icon"
-                onClick={handleApi}
-                src={searchIcon}
-                alt=""
-              />
+              <Link to="/search-result">
+                <img
+                  className="search-icon"
+                  onClick={handleApi}
+                  src={searchIcon}
+                  alt=""
+                />
+              </Link>
             </div>
-            <div className="about">About</div>
+            <Link to='/about' className="about">About</Link>
           </div>
         </div>
       </header>
-      <SearchResult data={data} />
-    </>
   );
 };
 
