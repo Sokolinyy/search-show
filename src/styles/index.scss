@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-$mainColor: #73b7cc;
+$mainColor: #2a2a2a;
 
-* a {
+a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 :root {
   background-color: $mainColor;
   font-family: 'Roboto', sans-serif;
+  padding: 40px;
+  color: white;
+  background: rgb(2,0,36);
+  background: linear-gradient(15deg, rgb(106, 96, 115) 0%, rgb(0, 86, 103) 100%);
 }
 
 .Home {
@@ -25,10 +29,11 @@ $mainColor: #73b7cc;
   position: fixed;
   top: 0;
   left: 0;
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
   width: 100%;
+  background-color: rgb(0, 86, 103);
 
   .header-container {
     width: 100%;
@@ -65,7 +70,7 @@ $mainColor: #73b7cc;
         border-radius: 10px;
         outline: none;
         border: none;
-        background-color: #d2f5ff;
+        background-color: #ffffff;
       }
 
       .search-icon {
@@ -80,8 +85,8 @@ $mainColor: #73b7cc;
     }
 
     .about {
-      color: rgb(0, 0, 0);
-      border: 3px solid black;
+      color: rgb(255, 255, 255);
+      border: 3px solid rgb(255, 255, 255);
       padding: 2px 20px;
       border-radius: 5px;
       cursor: pointer;
@@ -107,10 +112,11 @@ $mainColor: #73b7cc;
       align-items: center;
       justify-content: center;
       padding: 10px 20px;
-      border: 3px solid black;
+      border: 3px solid rgb(255, 255, 255);
       width: 40vw;
       padding: 20px 50px;
       border-radius: 10px;
+      color: white;
     }
   }
   
@@ -123,5 +129,75 @@ $mainColor: #73b7cc;
 }
 
 .Shows {
-  margin-top: 90px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+
+  .show-name {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .show-detail-container {
+    display: flex;
+    align-items: center;
+
+    .show-image {
+      width: 25vw;
+    }
+
+    .show-info-container {
+      width: 60%;
+      margin: auto;
+      font-size: 23px;
+      align-items: center;
+      background-color: #003141b3;
+      padding: 30px;
+      border-radius: 20px;
+
+      .show-name {
+        
+      }
+
+    }
+  }
+
+  .season-btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+  }
+
+  .season-btn {
+    padding: 15px 20px;
+    border: none;
+    gap: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .seasons-detail {
+    width: 100%;
+    margin: 0px auto;
+    margin-top: 50px;
+    font-size: 20px;
+    border-collapse: collapse;
+
+    th {
+      background-color: #004271;
+    }
+
+    tr:nth-child(2n) {
+      background-color: #005177;
+    }
+
+    td, th {
+      padding: 10px;
+      text-align: center;
+    }
+  }
+
 }

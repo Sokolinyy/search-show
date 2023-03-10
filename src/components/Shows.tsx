@@ -63,17 +63,20 @@ const Shows = (props: Props) => {
 
   return (
     <article className="Shows">
-      <h1 className="show-name">{show.name}</h1>
       <div className="show-detail-container">
         <div className="show-image-container">
           <img className="show-image" src={show.image.medium} alt={show.name} />
         </div>
         <div className="show-info-container">
+        <h1 className="show-name">{show.name}</h1>
           <p className="runtime">Average runtime: {show.averageRuntime} min</p>
           <p className="rating">Rating: {show.rating.average}</p>
           <p className="status">Status: {show.status}</p>
           <p className="description" dangerouslySetInnerHTML={{ __html: show.summary }} />
-          <div className="season-btn-box">
+        </div>
+      </div>
+
+      <div className="season-btn-box">
             {seasons.map((season) => (
               <button
                 className="season-btn"
@@ -86,8 +89,6 @@ const Shows = (props: Props) => {
               </button>
             ))}
           </div>
-        </div>
-      </div>
 
       {selectedSeason && (
         <table className="seasons-detail">

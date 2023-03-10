@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SearchContext } from "./components/SearchContext";
 import About from "./Pages/About";
 import Home from "./Pages/Home";
+import tvImage from "./assets/Daco_13269.png"
 
 function App() {
   const [data, setData] = useState<{ id: number; name: string }[]>([]);
