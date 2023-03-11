@@ -4,7 +4,7 @@ type Props = {}
 
 const Home = (props: Props) => {
   return (
-    <article className='Home'> TV SHOW</article>
+    <article className='Home'>SEARCH FOR TV SHOW</article>
   )
 }
 
