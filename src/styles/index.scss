@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content
+  }
+}
+
+@mixin laptop {
+  @media screen and (max-width: 1200px) {
+    @content
+  }
+}
+
 $mainColor: #2a2a2a;
 
 a {
@@ -14,6 +32,9 @@ a {
   color: white;
   background: rgb(2,0,36);
   background: linear-gradient(15deg, rgb(106, 96, 115) 0%, rgb(0, 86, 103) 100%);
+  @include mobile{
+    padding: 0;
+  }
 }
 
 .Home {
@@ -22,7 +43,6 @@ a {
   font-size: 40px;
   justify-content: center;
   align-items: center;
-
 }
 
 .header {
@@ -45,7 +65,9 @@ a {
 
     .logo-box {
       display: flex;
+      align-items: center;
       gap: 10px;
+      text-align: center;
 
       .logo-img {
         width: 30px;
@@ -71,6 +93,9 @@ a {
         outline: none;
         border: none;
         background-color: #ffffff;
+        @include mobile{
+          width: 70%;
+        }
       }
 
       .search-icon {
@@ -141,9 +166,15 @@ a {
   .show-detail-container {
     display: flex;
     align-items: center;
+    @include mobile {
+      flex-direction: column;
+    }
 
     .show-image {
-      width: 25vw;
+      width: 150%;
+      @include mobile{
+        width: 100vw;
+      }
     }
 
     .show-info-container {
@@ -154,11 +185,12 @@ a {
       background-color: #003141b3;
       padding: 30px;
       border-radius: 20px;
-
-      .show-name {
-        
+      @include mobile {
+        flex-direction: column;
+        width: 90vw;
+        padding: 20px;
+        margin: 0;
       }
-
     }
   }
 
@@ -177,27 +209,37 @@ a {
     margin: 10px;
     border-radius: 10px;
     cursor: pointer;
+    background-color: #004f76;
+    color: white;
   }
 
-  .seasons-detail {
-    width: 100%;
-    margin: 0px auto;
-    margin-top: 50px;
-    font-size: 20px;
-    border-collapse: collapse;
-
-    th {
-      background-color: #004271;
+  .table-container {
+    @include mobile {
+      width: 370px;
+      overflow-x: scroll;
     }
 
-    tr:nth-child(2n) {
-      background-color: #005177;
-    }
-
-    td, th {
-      padding: 10px;
-      text-align: center;
+    .seasons-detail {
+      width: 100%;
+      margin: 0px auto;
+      margin-top: 50px;
+      font-size: 20px;
+      border-collapse: collapse;
+  
+      th {
+        background-color: #004b81;
+      }
+  
+      tr:nth-child(2n) {
+        background-color: #00547e;
+      }
+  
+      td, th {
+        padding: 10px;
+        text-align: center;
+      }
     }
   }
+
 
 }
