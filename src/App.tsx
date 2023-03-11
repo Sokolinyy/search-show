@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import Shows from "./components/Shows";
 import { useState } from "react";
 import { SearchContext } from "./components/SearchContext";
-import About from "./Pages/About";
 import Home from "./Pages/Home";
 import tvImage from "./assets/Daco_13269.png"
 
@@ -19,7 +18,6 @@ function App() {
           <Route path="/" element={<Home /> }/>
           <Route path="/search-result" element={<SearchResult /> }/>
           <Route path="/:id" element={<Shows /> }/>
-          <Route path="/about" element={<About /> }/>
         </Routes>
       </SearchContext.Provider>
     </div>

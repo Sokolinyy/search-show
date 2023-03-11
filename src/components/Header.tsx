@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import searchIcon from "../assets/search-icon.svg";
 import tvIcon from "../assets/television-icon.svg";
 import axios from "axios";
 import SearchResult from "./SearchResult";
 import Shows from "./Shows";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, Route, Routes } from "react-router-dom";
 import { SearchContext } from "./SearchContext";
 import { useContext } from "react";
 // Define interface for API request
@@ -35,10 +35,14 @@ const Header = () => {
         console.log(error);
       });
   };
-
+  
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
+  
+  useEffect(() => {
+    handleApi()
+  }, [inputValue]);
 
   return (
       <header className="header">
@@ -49,22 +53,21 @@ const Header = () => {
           </Link>
           <div className="about-search-box">
             <div className="search">
+            <Link to="/search-result">
               <input
                 type="text"
                 placeholder="Search..."
                 value={inputValue}
                 onChange={handleInputChange}
               />
-              <Link to="/search-result">
+            </Link>
                 <img
                   className="search-icon"
                   onClick={handleApi}
                   src={searchIcon}
                   alt=""
                 />
-              </Link>
             </div>
-            <Link to='/about' className="about">About</Link>
           </div>
         </div>
       </header>
