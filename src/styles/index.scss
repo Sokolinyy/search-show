@@ -1,13 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+@mixin mobile-sm {
+  @media screen and (max-width: 400px) {
+    @content
+  }
+}
+
 @mixin mobile {
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 500px) {
     @content
   }
 }
 
 @mixin tablet {
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     @content
   }
 }
@@ -25,13 +31,20 @@ a {
   color: white;
 }
 
+html {
+  padding: 20px !important;
+  @include tablet {
+    padding: 20px !important;
+  }
+}
+
 :root {
   background-color: $mainColor;
   font-family: 'Roboto', sans-serif;
   padding: 40px;
   color: white;
   background: rgb(2,0,36);
-  background: linear-gradient(15deg, rgb(106, 96, 115) 0%, rgb(0, 86, 103) 100%);
+  background: linear-gradient(16deg, rgb(106, 96, 115) 0%, rgb(0, 86, 103) 100%);
   @include mobile{
     padding: 0;
   }
@@ -93,8 +106,8 @@ a {
         outline: none;
         border: none;
         background-color: #ffffff;
-        @include mobile{
-          width: 70%;
+        @include tablet {
+          width: 80%;
         }
       }
 
@@ -166,14 +179,23 @@ a {
   .show-detail-container {
     display: flex;
     align-items: center;
+
     @include mobile {
       flex-direction: column;
     }
+    @include tablet {
+      flex-direction: column;
+      align-items: center;
+
+    }
 
     .show-image {
-      width: 150%;
-      @include mobile{
-        width: 100vw;
+      width: 30vw;
+      padding: 10px;
+      border-radius: 33px;
+      @include tablet {
+        width: 90vw;
+        padding: 30px;
       }
     }
 
@@ -185,9 +207,9 @@ a {
       background-color: #003141b3;
       padding: 30px;
       border-radius: 20px;
-      @include mobile {
+      @include tablet {
         flex-direction: column;
-        width: 90vw;
+        width: 80vw;
         padding: 20px;
         margin: 0;
       }
@@ -199,7 +221,6 @@ a {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 150px;
   }
 
   .season-btn {
@@ -215,6 +236,10 @@ a {
 
   .table-container {
     @include mobile {
+      width: 420px;
+      overflow-x: scroll;
+    }
+    @include mobile-sm {
       width: 370px;
       overflow-x: scroll;
     }
