@@ -31,33 +31,57 @@ type Episode = {
 };
 
 const Shows = (props: Props) => {
+  // Component that will fetch data about show
+  // and their episodes, and render that info
+
+  // Uses the useParams hook from react-router-dom
+  // to extract the id parameter from the current URL.
+  // The extracted id value is stored in the
+  // id constant using object destructuring syntax.
   const { id } = useParams<{ id: string }>();
+  // State for stored fetched data about show
   const [show, setShow] = useState<Show>();
+  // State for stored fetched data about episodes
   const [episodes, setEpisodes] = useState<Episode[]>([]);
+  // State for checking, what season was clicked
   const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
 
   useEffect(() => {
+    // Fetch data and store it in show state
     fetch(`https://api.tvmaze.com/shows/${id}`)
       .then((response) => response.json())
       .then((data) => setShow(data));
 
+    // Fetch data and store it in episode state
     fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
       .then((response) => response.json())
       .then((data) => setEpisodes(data));
   }, [id]);
 
+  // If there is no data, render "Loading"
   if (!episodes.length || !show) {
     return (
-      <div style={{ display: "flex", fontSize: 40, justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          fontSize: 40,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         Loading...
       </div>
     );
   }
 
+  // Create an array of all unique seasons for the fetched episodes using the reduce method.
   const seasons = episodes.reduce<number[]>((acc, episode) => {
+    // Check if the current episode's season is already in the accumulator array.
     if (!acc.includes(episode.season)) {
+      // If not, add it to the accumulator array.
       acc.push(episode.season);
     }
+    // Return the updated accumulator array for the next iteration.
     return acc;
   }, []);
 
@@ -79,6 +103,7 @@ const Shows = (props: Props) => {
         </div>
       </div>
 
+      {/* Create button for each season with name "Season" + selectedSeason */}
       <div className="season-btn-box">
         {seasons.map((season) => (
           <button
@@ -93,6 +118,9 @@ const Shows = (props: Props) => {
         ))}
       </div>
 
+      {/* If button selectedSeason was clicked, render table, in this table
+       display info about: number of series, name, runtime, their rating, 
+       and release date  */}
       {selectedSeason && (
         <div className="table-container">
           <table className="seasons-detail">
@@ -106,28 +134,34 @@ const Shows = (props: Props) => {
               </tr>
             </thead>
             <tbody>
+              {/* Render a table of episodes for the selected season. */}
               {episodes
+              // Filter the array of episodes to only include those with the selected season.
                 .filter((episode) => episode.season === selectedSeason)
                 .map((episode) => (
+                  // Map the filtered array to an array of table rows.
                   <tr key={episode.id}>
                     <td>{episode.number}</td>
                     <td>{episode.name}</td>
                     <td>{episode.runtime} min</td>
                     <td>{episode.rating.average}</td>
                     <td>
+                      {/* Format the airdate as "MMM/DD/YYYY"
+                       using toLocaleDateString(). */}
                       {new Date(episode.airdate)
                         .toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "2-digit",
                         })
-                        .replaceAll(", ", "/").replace(' ', "/")}
+                        // Replace all commas and spaces to slash(/)
+                        .replaceAll(", ", "/")
+                        .replace(" ", "/")}
                     </td>
                   </tr>
                 ))}
             </tbody>
           </table>
-
         </div>
       )}
     </article>

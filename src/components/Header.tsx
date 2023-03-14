@@ -14,10 +14,16 @@ interface TVShow {
 }
 
 const Header = () => {
+  // Const for grab the value of input
   const [inputValue, setInputValue] = useState("");
   const { data, setData } = useContext(SearchContext);
 
   const handleApi = async () => {
+    // Sends a GET request to the TVMaze API with a search query
+    // generated from the inputValue state variable. If there are any
+    // search results, extracts the show ID and name and updates the
+    // data state variable using the setData function. Logs the data array
+    // to the console for debugging purposes.
     axios
       .get(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
       .then((response) => {
@@ -36,10 +42,12 @@ const Header = () => {
       });
   };
   
+  // Set value of inputValue to user input
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
   
+  // Every time when user write into field, call handleApi, 
   useEffect(() => {
     handleApi()
   }, [inputValue]);

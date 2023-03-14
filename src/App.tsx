@@ -5,15 +5,20 @@ import Shows from "./components/Shows";
 import { useState } from "react";
 import { SearchContext } from "./components/SearchContext";
 import Home from "./Pages/Home";
-import tvImage from "./assets/Daco_13269.png"
 
 function App() {
+  // State for set SearchContext
   const [data, setData] = useState<{ id: number; name: string }[]>([]);
 
   return (
     <div className="App">
+      {/* Wrapping everything in SearchContext for
+      access the variable data and setData in all components */}
       <SearchContext.Provider value={{data, setData}}>
         <Header />
+        {/* Routes coming from router-dom, and they define
+          how different URLs or paths will be matched to
+          different components of the application.  */}
         <Routes>
           <Route path="/" element={<Home /> }/>
           <Route path="/search-result" element={<SearchResult /> }/>
