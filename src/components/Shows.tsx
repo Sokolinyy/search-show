@@ -147,7 +147,7 @@ const Shows = (props: Props) => {
                     <td>{episode.name}</td>
                     <td>{episode.runtime} min</td>
                     <td>
-                      {episode.rating.average ? episode.rating.average : "?"}
+                      {episode.rating.average ? episode.rating.average : "-"}
                     </td>
                     <td>
                       {/* Format the airdate as "MMM/DD/YYYY"
