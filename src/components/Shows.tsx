@@ -94,7 +94,9 @@ const Shows = (props: Props) => {
         <div className="show-info-container">
           <h1 className="show-name">{show.name}</h1>
           <p className="runtime">Average runtime: {show.averageRuntime} min</p>
-          <p className="rating">Rating: {show.rating.average}</p>
+          <p className="rating">
+            Rating: {show.rating.average ? show.rating.average : "Unknown"}
+          </p>
           <p className="status">Status: {show.status}</p>
           <p
             className="description"
@@ -136,7 +138,7 @@ const Shows = (props: Props) => {
             <tbody>
               {/* Render a table of episodes for the selected season. */}
               {episodes
-              // Filter the array of episodes to only include those with the selected season.
+                // Filter the array of episodes to only include those with the selected season.
                 .filter((episode) => episode.season === selectedSeason)
                 .map((episode) => (
                   // Map the filtered array to an array of table rows.
@@ -144,7 +146,9 @@ const Shows = (props: Props) => {
                     <td>{episode.number}</td>
                     <td>{episode.name}</td>
                     <td>{episode.runtime} min</td>
-                    <td>{episode.rating.average}</td>
+                    <td>
+                      {episode.rating.average ? episode.rating.average : "?"}
+                    </td>
                     <td>
                       {/* Format the airdate as "MMM/DD/YYYY"
                        using toLocaleDateString(). */}
