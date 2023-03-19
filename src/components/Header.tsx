@@ -24,43 +24,44 @@ const Header = () => {
     // search results, extracts the show ID and name and updates the
     // data state variable using the setData function. Logs the data array
     // to the console for debugging purposes.
-    axios
-      .get(`https://api.tvmaze.com/search/shows?q=${inputValue}`)
-      .then((response) => {
-        const data = response.data.map((item: { show: TVShow }) => {
-          const { show } = item;
-          const { id, name } = show;
-          return { id, name };
-        });
-        if (data.length > 0) {
-          setData(data);
-        }
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
+    // Set value of inputValue to user input
+
+    try {
+      const response = await axios.get(
+        `https://api.tvmaze.com/search/shows?q=${inputValue}`
+      );
+      const data = response.data.map((item: { show: TVShow }) => {
+        const { show } = item;
+        const { id, name } = show;
+        return { id, name };
       });
+      if (data.length > 0) {
+        setData(data);
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
-  // Set value of inputValue to user input
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
-  
-  // Every time when user write into field, call handleApi, 
+
+  // Every time when user write into field, call handleApi,
   useEffect(() => {
-    handleApi()
+    handleApi();
   }, [inputValue]);
 
   return (
-      <header className="header">
-        <div className="header-container">
-          <Link to="/" className="logo-box">
-            <img className="logo-img" src={tvIcon} alt="" />
-            TV SEARCH
-          </Link>
-          <div className="about-search-box">
-            <div className="search">
+    <header className="header">
+      <div className="header-container">
+        <Link to="/" className="logo-box">
+          <img className="logo-img" src={tvIcon} alt="" />
+          TV SEARCH
+        </Link>
+        <div className="about-search-box">
+          <div className="search">
             <Link to="/search-result">
               <input
                 type="text"
@@ -69,16 +70,16 @@ const Header = () => {
                 onChange={handleInputChange}
               />
             </Link>
-                <img
-                  className="search-icon"
-                  onClick={handleApi}
-                  src={searchIcon}
-                  alt=""
-                />
-            </div>
+            <img
+              className="search-icon"
+              onClick={handleApi}
+              src={searchIcon}
+              alt=""
+            />
           </div>
         </div>
-      </header>
+      </div>
+    </header>
   );
 };
 
