@@ -8,18 +8,15 @@ const SearchResult = () => {
   return (
     <main className="main">
       <ul className="search-result">
-        {/* If there any data, which coming from SearchResult.tsx
-         map through array, and give each item key of "item id" to 
-         generate Link for each search result, (every show in has some unique id)
-         then create list item with name of search result, if there has no data,
-         set data to empty string  */}
-        {data
-          ? data.map((item) => (
-              <Link key={item.id} to={`/${item.id}`} >
-                <li className="search-list-result">{item.name}</li>
-              </Link>
-            ))
-          : ""}
+        {data && data.length > 0 ? (
+          data.map((item) => (
+            <Link key={item.id} to={`/${item.id}`}>
+              <li className="search-list-result">{item.name}</li>
+            </Link>
+          ))
+        ) : (
+          <li>No search results found.</li>
+        )}
       </ul>
     </main>
   );
